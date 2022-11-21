@@ -1,28 +1,48 @@
+
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="root">
+        <h1>App根组件, count_from_son is : {{count_from_son}}</h1>
+        <Left :msg="message" :student="student"></Left>
+        <Right @num_change="change"></Right>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Left from '@/components/Left.vue'
+import Right from '@/components/Right.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+
+    components: {
+        Left,
+        Right,
+    },
+
+    data: function () {
+        return {
+            message: 'Hello Vue.js',
+            student: {
+                name: 'zhangsan',
+                age: 22
+            },
+            // 定义一个来自子组件的值
+            count_from_son: 0
+        }
+    },
+
+    methods: {
+        change: function(val) {
+            console.log('change method invoke, val is :' + val);
+            this.count_from_son = val;
+        },
+    },
+
 }
 </script>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="less" scoped>
+.root {
+    padding: 5px 20px 260px 20px;
+    background-color: #b9bdb0;
 }
 </style>
